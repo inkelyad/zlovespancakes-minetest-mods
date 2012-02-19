@@ -24,7 +24,7 @@ register_gem = function( gemtype, max_clusters, min_depth, basetime, durability,
 	-- Gems/lumps --
 	gemname     = "gemstones:gem_" .. gemtype
 	gemtex      = "gemstones_gem_" .. gemtype .. ".png"
-	craftname   = 'craft "' .. gemname .. '"'
+	craftname   = gemname
 
 	-- Solid block --
 	blockname   = "gemstones:block_" .. gemtype
@@ -53,16 +53,15 @@ register_gem = function( gemtype, max_clusters, min_depth, basetime, durability,
 		inventory_image       = minetest.inventorycube( mineraltex ),
 		is_ground_content     = true,
 		material              = minetest.digprop_stonelike(1.0),
-		dug_item              = craftname .. ' 1',
-		extra_dug_item        = craftname .. ' 1',
-		extra_dug_item_rarity = 20,
+		drop                  = craftname .. ' 1',
+
 	} )
 
 	-- Solid block --
 	minetest.register_node( blockname, {
 		--drawtype              = "glasslike",
 		tile_images           = { blocktex },
-		inventory_image       = minetest.inventorycube( blocktex ),
+		inventory_image       = blocktex,
 		--alpha                 = 200,
 		is_ground_content     = true,
 		material              = minetest.digprop_glasslike(3.0),
@@ -73,7 +72,7 @@ register_gem = function( gemtype, max_clusters, min_depth, basetime, durability,
 
 	-- Crafting blocks --
 	minetest.register_craft( {
-		output                = 'node "' .. blockname .. '" 1',
+		output                = blockname .. ' 1',
 		recipe = {
 			                { craftname,craftname,craftname },
 			                { craftname,craftname,craftname },
@@ -84,7 +83,7 @@ register_gem = function( gemtype, max_clusters, min_depth, basetime, durability,
 	minetest.register_craft( {
 		output                = craftname .. ' 9',
 		recipe = {
-			                { 'node "' .. blockname .. '"' },
+			                { blockname .. '"' },
 		},
 	} )
 end
@@ -155,4 +154,4 @@ register_gem( "sapphire", 50, 5, 1.2, 500, { sword_time = 1 } )
 
 ---- Was loaded? ---------------------------------------------------------------
 -- Just to be sure, may remove if you like.
-print( "Loaded: Gemstones, by ZLovesPancakes" )
+print( " ++ loaded : Gemstones, by ZLovesPancakes" )
